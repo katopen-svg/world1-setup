@@ -532,9 +532,11 @@
       <div class="tool-icon">🤖</div>
       <div>
         <div class="tool-name">Claude Code</div>
-        <div class="tool-desc">AnthropicのAI CLIツール｜ターミナルでAIと会話しながら開発</div>
+        <div class="tool-desc">AnthropicのAIコーディングアシスタント｜デスクトップアプリ版</div>
       </div>
     </div>
+
+    <div class="warning" style="margin-bottom: 20px;">⚠️ 利用には <strong>Pro・Max・Team・Enterpriseいずれかの有料プラン</strong> が必要です。</div>
 
     <div class="section-label">セットアップ手順</div>
 
@@ -542,33 +544,44 @@
       <li class="step">
         <div class="step-left"><div class="step-num">1</div></div>
         <div class="step-content">
-          <div class="step-title">ターミナルを開く</div>
+          <div class="step-title">デスクトップアプリをダウンロードする</div>
           <div class="step-body">
-            <div class="os-tabs">
-              <button class="os-tab active" onclick="switchOS(this,'cc-mac')">Mac</button>
-              <button class="os-tab" onclick="switchOS(this,'cc-win')">Windows</button>
+            下のボタンからお使いのOSに合わせてダウンロードする。Node.jsなどの事前インストールは不要。
+            <div class="btn-row">
+              <a class="btn-link" href="https://claude.com/download" target="_blank">→ Claude ダウンロードページ</a>
+              <a class="btn-secondary" href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank">📖 公式セットアップガイド</a>
             </div>
-            <div id="cc-mac" class="os-content active">
-              <kbd class="kbd">Command ⌘</kbd> + <kbd class="kbd">Space</kbd> を押して Spotlight を開き、「ターミナル」と入力してEnter
-            </div>
-            <div id="cc-win" class="os-content">
-              スタートメニューで「PowerShell」または「コマンドプロンプト」を検索して開く<br>
-              <div class="warning">⚠️ WindowsではWSL（Windows Subsystem for Linux）の使用を推奨。インストールがまだの場合は先にWSLを入れてください。</div>
-            </div>
+            <ul style="margin-top: 10px;">
+              <li><strong>Mac</strong>：「Download for macOS」をクリック（Intel・Apple Silicon 両対応）</li>
+              <li><strong>Windows</strong>：「Download for Windows」をクリック（x64）</li>
+            </ul>
           </div>
         </div>
       </li>
       <li class="step">
         <div class="step-left"><div class="step-num">2</div></div>
         <div class="step-content">
-          <div class="step-title">Node.js のバージョンを確認する</div>
+          <div class="step-title">インストールする</div>
           <div class="step-body">
-            ターミナルに以下を入力してEnterを押す。
-            <div class="code-block">node --version</div>
-            <code>v18.0.0</code> 以上の数字が表示されればOK。<br>
-            「command not found」と表示された場合は <a href="https://nodejs.org/ja" target="_blank" style="color:#6366f1">nodejs.org</a> からNode.jsをインストールする。
-            <div class="btn-row">
-              <a class="btn-secondary" href="https://nodejs.org/ja" target="_blank">→ Node.js 公式サイト（LTS版をダウンロード）</a>
+            <div class="os-tabs">
+              <button class="os-tab active" onclick="switchOS(this,'cc-mac')">Mac</button>
+              <button class="os-tab" onclick="switchOS(this,'cc-win')">Windows</button>
+            </div>
+            <div id="cc-mac" class="os-content active">
+              <ul>
+                <li>ダウンロードした <code>.dmg</code> ファイルをダブルクリック</li>
+                <li>Claudeのアイコンを <strong>「Applications」フォルダにドラッグ</strong></li>
+                <li>ApplicationsフォルダからClaudeを起動</li>
+                <li>「開発元を確認できない」と表示されたら → <strong>システム設定 → プライバシーとセキュリティ → 「このまま開く」</strong></li>
+              </ul>
+            </div>
+            <div id="cc-win" class="os-content">
+              <ul>
+                <li>ダウンロードした <code>.exe</code> ファイルをダブルクリック</li>
+                <li>インストールウィザードに沿って「次へ」を押して進める</li>
+                <li>インストール完了後、スタートメニューまたはデスクトップのアイコンから起動</li>
+                <li>Windowsでローカルファイルを操作するには <a href="https://git-scm.com/downloads/win" target="_blank" style="color:#f59e0b">Git for Windows</a> が必要</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -576,29 +589,40 @@
       <li class="step">
         <div class="step-left"><div class="step-num">3</div></div>
         <div class="step-content">
-          <div class="step-title">Claude Code をインストールする</div>
+          <div class="step-title">Anthropicアカウントでサインインする</div>
           <div class="step-body">
-            ターミナルに以下を入力してEnterを押す（コピペ推奨）。
-            <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
-            文字がたくさん流れて最後に <code>added XX packages</code> と表示されたら成功。
-            <div class="warning">⚠️ <code>sudo</code> をつけないこと。<code>sudo npm install</code> はNG。</div>
+            アプリを起動したらサインイン画面が表示される。<br>
+            <strong>claude.ai で使っているアカウント</strong>（Google ログインでもOK）でサインインする。
+            <div class="tip">💡 アカウントを持っていない場合は claude.ai から無料登録できます（ただしClaude Codeの使用には有料プランが必要）。</div>
           </div>
         </div>
       </li>
       <li class="step">
         <div class="step-left"><div class="step-num">4</div></div>
         <div class="step-content">
-          <div class="step-title">起動してAnthropicアカウントにログイン</div>
+          <div class="step-title">「Code」タブを開く</div>
           <div class="step-body">
-            ターミナルで以下を入力してEnter。
-            <div class="code-block">claude</div>
-            ブラウザが自動で開いてAnthropicのログイン画面になる。<br>
-            Anthropicアカウント（claude.ai で使っているもの）でログインするとターミナルに戻り、AIと会話できる状態になる。
-            <div class="tip">💡 ログイン後は <code>claude</code> と打つだけでいつでも起動できます。</div>
-            <div class="btn-row">
-              <a class="btn-secondary" href="https://code.claude.com/docs/en/setup" target="_blank">📖 公式セットアップドキュメント</a>
-              <a class="btn-secondary" href="https://www.nxcode.io/resources/news/install-claude-code-setup-guide-2026" target="_blank">📸 画像つきインストールガイド（英語）</a>
-            </div>
+            アプリ上部中央にある <strong>「Code」タブ</strong> をクリックする。<br>
+            <ul style="margin-top: 8px;">
+              <li>「アップグレードが必要」と表示された場合 → 有料プランへの加入が必要</li>
+              <li>「オンラインでサインインしてください」と表示された場合 → ブラウザでサインインしてアプリを再起動</li>
+            </ul>
+            <div class="tip">💡 アプリには「Chat」「Cowork」「Code」の3つのタブがあります。AIコーディングには <strong>「Code」タブ</strong> を使います。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">5</div></div>
+        <div class="step-content">
+          <div class="step-title">フォルダを選択して使い始める</div>
+          <div class="step-body">
+            Codeタブが開いたら：
+            <ul>
+              <li><strong>「Local」</strong> を選択（自分のPCのファイルを使う場合）</li>
+              <li><strong>「Select folder」</strong> をクリックして作業したいフォルダを選ぶ</li>
+              <li>チャット欄にやりたいことを日本語で入力すればOK</li>
+            </ul>
+            <div class="tip">💡 最初は小さなプロジェクトや空のフォルダで試すのがおすすめです。</div>
           </div>
         </div>
       </li>
