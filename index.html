@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World 1 クリアに必要なツールのセットアップ方法</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    header p {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.65);
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .progress-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .progress-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .tool-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-top: 4px solid;
+    }
+
+    .tool-card:nth-child(1) { border-color: #6366f1; }
+    .tool-card:nth-child(2) { border-color: #f59e0b; }
+    .tool-card:nth-child(3) { border-color: #10b981; }
+    .tool-card:nth-child(4) { border-color: #ec4899; }
+    .tool-card:nth-child(5) { border-color: #3b82f6; }
+
+    .tool-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .tool-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .tool-card:nth-child(1) .tool-icon { background: #ede9fe; }
+    .tool-card:nth-child(2) .tool-icon { background: #fef3c7; }
+    .tool-card:nth-child(3) .tool-icon { background: #d1fae5; }
+    .tool-card:nth-child(4) .tool-icon { background: #fce7f3; }
+    .tool-card:nth-child(5) .tool-icon { background: #dbeafe; }
+
+    .tool-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #555;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tool-card:nth-child(1) .step-num { background: #ede9fe; color: #6366f1; }
+    .tool-card:nth-child(2) .step-num { background: #fef3c7; color: #d97706; }
+    .tool-card:nth-child(3) .step-num { background: #d1fae5; color: #059669; }
+    .tool-card:nth-child(4) .step-num { background: #fce7f3; color: #db2777; }
+    .tool-card:nth-child(5) .step-num { background: #dbeafe; color: #2563eb; }
+
+    .step-text { font-size: 15px; padding-top: 3px; }
+
+    .step-text code {
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 13px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: #e11d48;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      background: #1a1a2e;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .btn-link:hover { opacity: 0.8; }
+
+    .icon-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .icon-table th {
+      background: #f8fafc;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      color: #888;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .icon-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: middle;
+    }
+
+    .icon-table tr:last-child td { border-bottom: none; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .status-not-started { background: #e0e7ff; color: #3730a3; }
+    .status-in-progress { background: #dbeafe; color: #1d4ed8; }
+    .status-done { background: #d1fae5; color: #065f46; }
+    .status-paused { background: #fef3c7; color: #92400e; }
+
+    .kbd {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 12px;
+      font-family: 'SF Mono', monospace;
+      color: #374151;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 20px 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #bbb;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🎮 AI講座 World 1</div>
+  <h1>クリアに必要なツールの<br>セットアップ方法</h1>
+  <p>5つのツールをセットアップして World 1 をクリアしよう</p>
+</header>
+
+<div class="container">
+
+  <div class="progress">
+    <div class="progress-item"><span class="dot" style="background:#6366f1"></span>Cursor</div>
+    <div class="progress-item"><span class="dot" style="background:#f59e0b"></span>Claude Code</div>
+    <div class="progress-item"><span class="dot" style="background:#10b981"></span>スプレッドシート</div>
+    <div class="progress-item"><span class="dot" style="background:#ec4899"></span>Claude in Chrome</div>
+    <div class="progress-item"><span class="dot" style="background:#3b82f6"></span>Addness</div>
+  </div>
+
+  <!-- 1. Cursor -->
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon">⚡</div>
+      <div>
+        <div class="tool-name">Cursor</div>
+        <div class="tool-desc">AIコードエディター</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span class="step-text"><strong>cursor.com</strong> にアクセスしてダウンロードボタンをクリック</span></li>
+      <li><span class="step-num">2</span><span class="step-text">ダウンロードした <code>.dmg</code>（Mac）または <code>.exe</code>（Windows）を開いてインストール</span></li>
+      <li><span class="step-num">3</span><span class="step-text">Cursorを起動し、アカウントを作成またはGoogleでサインイン</span></li>
+      <li><span class="step-num">4</span><span class="step-text">初期設定のウィザードに沿って完了させる</span></li>
+    </ol>
+  </div>
+
+  <!-- 2. Claude Code -->
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon">🤖</div>
+      <div>
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-desc">AnthropicのAI CLIツール</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span class="step-text">ターミナル（Mac）またはコマンドプロンプト（Windows）を開く</span></li>
+      <li><span class="step-num">2</span><span class="step-text">以下のコマンドを入力してインストール：<br><code>npm install -g @anthropic-ai/claude-code</code></span></li>
+      <li><span class="step-num">3</span><span class="step-text"><code>claude</code> と入力してEnterで起動を確認</span></li>
+      <li><span class="step-num">4</span><span class="step-text">Anthropicアカウントでログインし、APIキーを設定</span></li>
+    </ol>
+  </div>
+
+  <!-- 3. スプレッドシート -->
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon">📊</div>
+      <div>
+        <div class="tool-name">Google スプレッドシート</div>
+        <div class="tool-desc">Googleのオンライン表計算ツール</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span class="step-text">Googleアカウントにログイン（持っていない場合は作成）</span></li>
+      <li><span class="step-num">2</span><span class="step-text">Googleドライブ（drive.google.com）を開く</span></li>
+      <li><span class="step-num">3</span><span class="step-text">「＋ 新規」→「Googleスプレッドシート」をクリックして作成</span></li>
+      <li><span class="step-num">4</span><span class="step-text">ブックマークしておくと次回以降スムーズ</span></li>
+    </ol>
+  </div>
+
+  <!-- 4. Claude in Chrome -->
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon">🌐</div>
+      <div>
+        <div class="tool-name">Claude in Chrome</div>
+        <div class="tool-desc">Chrome拡張機能でClaudeを使う</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span class="step-text">Google Chromeを開く（インストールしていない場合は先にインストール）</span></li>
+      <li><span class="step-num">2</span><span class="step-text">Chrome ウェブストアで「Claude」を検索</span></li>
+      <li><span class="step-num">3</span><span class="step-text">「Chromeに追加」をクリックして拡張機能をインストール</span></li>
+      <li><span class="step-num">4</span><span class="step-text">Anthropicアカウントでログインして完了</span></li>
+    </ol>
+  </div>
+
+  <!-- 5. Addness -->
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon">✅</div>
+      <div>
+        <div class="tool-name">Addness</div>
+        <div class="tool-desc">タスク・ゴール管理ツール</div>
+      </div>
+    </div>
+
+    <div class="section-label">セットアップ手順</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span class="step-text">下のボタンからサインアップページを開く</span></li>
+      <li><span class="step-num">2</span><span class="step-text">「Googleでログイン」をタップしてアカウントを選択</span></li>
+      <li><span class="step-num">3</span><span class="step-text">ログイン完了でセットアップ終了</span></li>
+    </ol>
+
+    <a class="btn-link" href="https://www.addness.com/sign-in?redirect_url=https%3A%2F%2Fwww.addness.com%2F" target="_blank">
+      → Addness サインアップはこちら
+    </a>
+
+    <div class="divider"></div>
+
+    <div class="section-label">アイコンの意味</div>
+    <table class="icon-table">
+      <thead>
+        <tr>
+          <th>ステータス</th>
+          <th>意味</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-badge status-not-started">▷ 未着手</span></td>
+          <td>まだ始めていない状態</td>
+        </tr>
+        <tr>
+          <td><span class="status-badge status-in-progress">✔ 実行中</span></td>
+          <td>現在進行中</td>
+        </tr>
+        <tr>
+          <td><span class="status-badge status-paused">⏸ 一時停止</span></td>
+          <td>一時的に止めている状態</td>
+        </tr>
+        <tr>
+          <td><span class="status-badge status-done">✔ 完了</span></td>
+          <td>完了した状態</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="section-label">操作ガイド</div>
+    <table class="icon-table">
+      <thead>
+        <tr>
+          <th>操作</th>
+          <th>方法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>実行開始 / 完了</td><td>●クリック</td></tr>
+        <tr><td>タイトルを編集</td><td>テキストクリック</td></tr>
+        <tr><td>編集を開始</td><td><span class="kbd">Enter</span></td></tr>
+        <tr><td>ゴールを移動</td><td><span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">Tab</span></td></tr>
+        <tr><td>保存して次を追加</td><td><span class="kbd">Enter</span></td></tr>
+        <tr><td>編集をキャンセル</td><td><span class="kbd">Esc</span></td></tr>
+        <tr><td>ゴールを削除（空のとき）</td><td><span class="kbd">Delete</span> <span class="kbd">⌫</span></td></tr>
+        <tr><td>ドラッグで並び替え</td><td>ドラッグ＆ドロップ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  AI講座 World 1 セットアップガイド
+</footer>
+
+</body>
+</html>
