@@ -11,16 +11,16 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
       background: #f5f5f0;
       color: #1a1a1a;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
+    /* ===== HEADER ===== */
     header {
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
       color: white;
       padding: 60px 24px 48px;
       text-align: center;
     }
-
     header .badge {
       display: inline-block;
       background: rgba(255,255,255,0.15);
@@ -31,34 +31,65 @@
       letter-spacing: 0.05em;
       margin-bottom: 16px;
     }
-
     header h1 {
       font-size: clamp(22px, 5vw, 36px);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.3;
     }
-
     header p {
       margin-top: 12px;
       color: rgba(255,255,255,0.65);
       font-size: 15px;
     }
 
+    /* ===== NAV ===== */
+    .toc {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 20px;
+    }
+    .toc-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 10px 0;
+    }
+    .toc-inner::-webkit-scrollbar { display: none; }
+    .toc-inner a {
+      flex-shrink: 0;
+      text-decoration: none;
+      color: #555;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .toc-inner a:hover { background: #f3f4f6; color: #111; }
+
+    /* ===== CONTAINER ===== */
     .container {
       max-width: 760px;
       margin: 0 auto;
-      padding: 48px 20px 80px;
+      padding: 40px 20px 80px;
     }
 
+    /* ===== PROGRESS BAR ===== */
     .progress {
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
       flex-wrap: wrap;
     }
-
     .progress-item {
       display: flex;
       align-items: center;
@@ -70,22 +101,21 @@
       font-weight: 500;
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
-
     .progress-item .dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
     }
 
+    /* ===== TOOL CARD ===== */
     .tool-card {
       background: white;
       border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 24px;
+      padding: 36px;
+      margin-bottom: 28px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border-top: 4px solid;
+      scroll-margin-top: 60px;
     }
-
     .tool-card:nth-child(1) { border-color: #6366f1; }
     .tool-card:nth-child(2) { border-color: #f59e0b; }
     .tool-card:nth-child(3) { border-color: #10b981; }
@@ -95,166 +125,284 @@
     .tool-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 14px;
+      margin-bottom: 28px;
     }
-
     .tool-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 48px; height: 48px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       flex-shrink: 0;
     }
-
     .tool-card:nth-child(1) .tool-icon { background: #ede9fe; }
     .tool-card:nth-child(2) .tool-icon { background: #fef3c7; }
     .tool-card:nth-child(3) .tool-icon { background: #d1fae5; }
     .tool-card:nth-child(4) .tool-icon { background: #fce7f3; }
     .tool-card:nth-child(5) .tool-icon { background: #dbeafe; }
 
-    .tool-name {
-      font-size: 20px;
+    .tool-name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+    .tool-desc { font-size: 13px; color: #888; margin-top: 2px; }
+
+    /* ===== STEPS ===== */
+    .section-label {
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      margin-top: 24px;
     }
 
-    .tool-desc {
-      font-size: 13px;
-      color: #888;
-      margin-top: 2px;
+    .steps { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: 0;
+      width: 2px;
+      background: #f0f0f0;
     }
 
-    .steps {
-      list-style: none;
+    .step-left {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      align-items: center;
+      margin-right: 16px;
+      padding-top: 4px;
     }
-
-    .steps li {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
     .step-num {
-      width: 26px;
-      height: 26px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       background: #f3f4f6;
       color: #555;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
+      position: relative;
+      z-index: 1;
     }
-
     .tool-card:nth-child(1) .step-num { background: #ede9fe; color: #6366f1; }
     .tool-card:nth-child(2) .step-num { background: #fef3c7; color: #d97706; }
     .tool-card:nth-child(3) .step-num { background: #d1fae5; color: #059669; }
     .tool-card:nth-child(4) .step-num { background: #fce7f3; color: #db2777; }
     .tool-card:nth-child(5) .step-num { background: #dbeafe; color: #2563eb; }
 
-    .step-text { font-size: 15px; padding-top: 3px; }
+    .step-content {
+      padding: 4px 0 24px;
+      flex: 1;
+    }
 
-    .step-text code {
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .step-body {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .step-body ul {
+      margin-top: 6px;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    code {
       background: #f3f4f6;
-      border-radius: 4px;
-      padding: 1px 6px;
+      border-radius: 5px;
+      padding: 2px 7px;
       font-size: 13px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
       color: #e11d48;
     }
 
+    .code-block {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+      font-size: 13px;
+      margin-top: 8px;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .tip {
+      background: #f0fdf4;
+      border-left: 3px solid #10b981;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #065f46;
+      margin-top: 8px;
+    }
+
+    .warning {
+      background: #fffbeb;
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+      margin-top: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
     .btn-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 20px;
       background: #1a1a2e;
       color: white;
       text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 11px 22px;
+      border-radius: 10px;
       font-size: 14px;
       font-weight: 600;
       transition: opacity 0.2s;
+      margin-top: 4px;
     }
     .btn-link:hover { opacity: 0.8; }
 
-    .icon-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .icon-table th {
-      background: #f8fafc;
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 12px;
-      color: #888;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      border-bottom: 2px solid #e5e7eb;
-    }
-
-    .icon-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid #f0f0f0;
-      vertical-align: middle;
-    }
-
-    .icon-table tr:last-child td { border-bottom: none; }
-
-    .status-badge {
+    .btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 3px 10px;
-      border-radius: 20px;
+      background: #f3f4f6;
+      color: #374151;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
       font-size: 13px;
       font-weight: 500;
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: #e5e7eb; }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
     }
 
-    .status-not-started { background: #e0e7ff; color: #3730a3; }
-    .status-in-progress { background: #dbeafe; color: #1d4ed8; }
-    .status-done { background: #d1fae5; color: #065f46; }
-    .status-paused { background: #fef3c7; color: #92400e; }
+    /* ===== DIVIDER ===== */
+    .divider { height: 1px; background: #f0f0f0; margin: 24px 0; }
+
+    /* ===== TABLES ===== */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .info-table th {
+      background: #f8fafc;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      color: #999;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .info-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: middle;
+      color: #444;
+    }
+    .info-table tr:last-child td { border-bottom: none; }
 
     .kbd {
       background: #f3f4f6;
       border: 1px solid #d1d5db;
-      border-radius: 4px;
-      padding: 2px 7px;
+      border-bottom-width: 2px;
+      border-radius: 5px;
+      padding: 2px 8px;
       font-size: 12px;
       font-family: 'SF Mono', monospace;
       color: #374151;
     }
 
-    .divider {
-      height: 1px;
-      background: #e5e7eb;
-      margin: 20px 0;
+    /* ===== STATUS BADGES ===== */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 11px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status-not-started { background: #e0e7ff; color: #3730a3; }
+    .status-in-progress { background: #dbeafe; color: #1d4ed8; }
+    .status-done { background: #d1fae5; color: #065f46; }
+    .status-paused { background: #fef3c7; color: #92400e; }
+
+    /* ===== CHECKLIST ===== */
+    .checklist {
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 12px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 14px;
+      color: #444;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .check-circle {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 2px solid #d1d5db;
+      flex-shrink: 0;
     }
 
-    .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #aaa;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    /* ===== OS TABS ===== */
+    .os-tabs { display: flex; gap: 4px; margin-bottom: 14px; }
+    .os-tab {
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #f3f4f6;
+      color: #555;
+      border: none;
+      transition: all 0.15s;
     }
+    .os-tab.active { background: #1a1a2e; color: white; }
+    .os-content { display: none; }
+    .os-content.active { display: block; }
 
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 32px;
@@ -268,8 +416,18 @@
 <header>
   <div class="badge">🎮 AI講座 World 1</div>
   <h1>クリアに必要なツールの<br>セットアップ方法</h1>
-  <p>5つのツールをセットアップして World 1 をクリアしよう</p>
+  <p>5つのツールを順番にセットアップして World 1 をクリアしよう</p>
 </header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#cursor">⚡ Cursor</a>
+    <a href="#claudecode">🤖 Claude Code</a>
+    <a href="#spreadsheet">📊 スプレッドシート</a>
+    <a href="#claudechrome">🌐 Claude in Chrome</a>
+    <a href="#addness">✅ Addness</a>
+  </div>
+</nav>
 
 <div class="container">
 
@@ -281,121 +439,382 @@
     <div class="progress-item"><span class="dot" style="background:#3b82f6"></span>Addness</div>
   </div>
 
-  <!-- 1. Cursor -->
-  <div class="tool-card">
+  <!-- ==================== 1. Cursor ==================== -->
+  <div class="tool-card" id="cursor">
     <div class="tool-header">
       <div class="tool-icon">⚡</div>
       <div>
         <div class="tool-name">Cursor</div>
-        <div class="tool-desc">AIコードエディター</div>
-      </div>
-    </div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><span class="step-text"><strong>cursor.com</strong> にアクセスしてダウンロードボタンをクリック</span></li>
-      <li><span class="step-num">2</span><span class="step-text">ダウンロードした <code>.dmg</code>（Mac）または <code>.exe</code>（Windows）を開いてインストール</span></li>
-      <li><span class="step-num">3</span><span class="step-text">Cursorを起動し、アカウントを作成またはGoogleでサインイン</span></li>
-      <li><span class="step-num">4</span><span class="step-text">初期設定のウィザードに沿って完了させる</span></li>
-    </ol>
-  </div>
-
-  <!-- 2. Claude Code -->
-  <div class="tool-card">
-    <div class="tool-header">
-      <div class="tool-icon">🤖</div>
-      <div>
-        <div class="tool-name">Claude Code</div>
-        <div class="tool-desc">AnthropicのAI CLIツール</div>
-      </div>
-    </div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><span class="step-text">ターミナル（Mac）またはコマンドプロンプト（Windows）を開く</span></li>
-      <li><span class="step-num">2</span><span class="step-text">以下のコマンドを入力してインストール：<br><code>npm install -g @anthropic-ai/claude-code</code></span></li>
-      <li><span class="step-num">3</span><span class="step-text"><code>claude</code> と入力してEnterで起動を確認</span></li>
-      <li><span class="step-num">4</span><span class="step-text">Anthropicアカウントでログインし、APIキーを設定</span></li>
-    </ol>
-  </div>
-
-  <!-- 3. スプレッドシート -->
-  <div class="tool-card">
-    <div class="tool-header">
-      <div class="tool-icon">📊</div>
-      <div>
-        <div class="tool-name">Google スプレッドシート</div>
-        <div class="tool-desc">Googleのオンライン表計算ツール</div>
-      </div>
-    </div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><span class="step-text">Googleアカウントにログイン（持っていない場合は作成）</span></li>
-      <li><span class="step-num">2</span><span class="step-text">Googleドライブ（drive.google.com）を開く</span></li>
-      <li><span class="step-num">3</span><span class="step-text">「＋ 新規」→「Googleスプレッドシート」をクリックして作成</span></li>
-      <li><span class="step-num">4</span><span class="step-text">ブックマークしておくと次回以降スムーズ</span></li>
-    </ol>
-  </div>
-
-  <!-- 4. Claude in Chrome -->
-  <div class="tool-card">
-    <div class="tool-header">
-      <div class="tool-icon">🌐</div>
-      <div>
-        <div class="tool-name">Claude in Chrome</div>
-        <div class="tool-desc">Chrome拡張機能でClaudeを使う</div>
-      </div>
-    </div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><span class="step-text">Google Chromeを開く（インストールしていない場合は先にインストール）</span></li>
-      <li><span class="step-num">2</span><span class="step-text">Chrome ウェブストアで「Claude」を検索</span></li>
-      <li><span class="step-num">3</span><span class="step-text">「Chromeに追加」をクリックして拡張機能をインストール</span></li>
-      <li><span class="step-num">4</span><span class="step-text">Anthropicアカウントでログインして完了</span></li>
-    </ol>
-  </div>
-
-  <!-- 5. Addness -->
-  <div class="tool-card">
-    <div class="tool-header">
-      <div class="tool-icon">✅</div>
-      <div>
-        <div class="tool-name">Addness</div>
-        <div class="tool-desc">タスク・ゴール管理ツール</div>
+        <div class="tool-desc">AIコードエディター｜コーディングのメイン作業場</div>
       </div>
     </div>
 
     <div class="section-label">セットアップ手順</div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><span class="step-text">下のボタンからサインアップページを開く</span></li>
-      <li><span class="step-num">2</span><span class="step-text">「Googleでログイン」をタップしてアカウントを選択</span></li>
-      <li><span class="step-num">3</span><span class="step-text">ログイン完了でセットアップ終了</span></li>
-    </ol>
 
-    <a class="btn-link" href="https://www.addness.com/sign-in?redirect_url=https%3A%2F%2Fwww.addness.com%2F" target="_blank">
-      → Addness サインアップはこちら
-    </a>
+    <ul class="steps">
+      <li class="step">
+        <div class="step-left"><div class="step-num">1</div></div>
+        <div class="step-content">
+          <div class="step-title">公式サイトからダウンロード</div>
+          <div class="step-body">
+            下のボタンをクリックして公式サイト（cursor.com）を開く。<br>
+            ページ中央の <strong>「Download」ボタン</strong> をクリックするとお使いのOS（Mac / Windows）を自動で判定してダウンロードが始まる。
+            <div class="btn-row">
+              <a class="btn-link" href="https://cursor.com/download" target="_blank">→ Cursor ダウンロードページ</a>
+              <a class="btn-secondary" href="https://daily.dev/blog/setup-cursor-first-time" target="_blank">📸 セットアップ画像つきガイド（英語）</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">2</div></div>
+        <div class="step-content">
+          <div class="step-title">インストール</div>
+          <div class="step-body">
+            <div class="os-tabs">
+              <button class="os-tab active" onclick="switchOS(this,'cursor-mac')">Mac</button>
+              <button class="os-tab" onclick="switchOS(this,'cursor-win')">Windows</button>
+            </div>
+            <div id="cursor-mac" class="os-content active">
+              <ul>
+                <li>ダウンロードした <code>.dmg</code> ファイルをダブルクリック</li>
+                <li>Cursorのアイコンを <strong>「Applications」フォルダにドラッグ</strong></li>
+                <li>LaunchpadまたはApplicationsフォルダからCursorを起動</li>
+                <li>「開発元を確認できない」と表示されたら → <strong>システム設定 → プライバシーとセキュリティ → 「このまま開く」</strong> をクリック</li>
+              </ul>
+            </div>
+            <div id="cursor-win" class="os-content">
+              <ul>
+                <li>ダウンロードした <code>.exe</code> ファイルをダブルクリック</li>
+                <li>インストールウィザードが開くので「次へ」を押して進める</li>
+                <li>インストール完了後、デスクトップのアイコンからCursorを起動</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">3</div></div>
+        <div class="step-content">
+          <div class="step-title">アカウントにサインイン</div>
+          <div class="step-body">
+            起動するとウェルカム画面が表示される。<strong>「Sign In」</strong>をクリックして以下のいずれかでログイン。
+            <ul>
+              <li>Googleアカウント（一番かんたん）</li>
+              <li>GitHubアカウント</li>
+              <li>メールアドレスで新規登録</li>
+            </ul>
+            <div class="tip">💡 無料プランでもAI機能が使えます。まずは無料で始めましょう。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">4</div></div>
+        <div class="step-content">
+          <div class="step-title">初期設定を完了させる</div>
+          <div class="step-body">
+            ログイン後、初期設定ウィザードが表示される。
+            <ul>
+              <li><strong>テーマ選択</strong>：Dark（暗い）/ Light（明るい）お好みで選ぶ</li>
+              <li><strong>VS Code設定のインポート</strong>：使ったことがない場合は「Skip」でOK</li>
+              <li><strong>言語設定</strong>：日本語UIにしたい場合はExtensionsで「Japanese Language Pack」を検索してインストール</li>
+            </ul>
+            <div class="tip">💡 設定は後からいつでも変えられます。まずは「Next」を押して進めましょう。</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== 2. Claude Code ==================== -->
+  <div class="tool-card" id="claudecode">
+    <div class="tool-header">
+      <div class="tool-icon">🤖</div>
+      <div>
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-desc">AnthropicのAI CLIツール｜ターミナルでAIと会話しながら開発</div>
+      </div>
+    </div>
+
+    <div class="section-label">セットアップ手順</div>
+
+    <ul class="steps">
+      <li class="step">
+        <div class="step-left"><div class="step-num">1</div></div>
+        <div class="step-content">
+          <div class="step-title">ターミナルを開く</div>
+          <div class="step-body">
+            <div class="os-tabs">
+              <button class="os-tab active" onclick="switchOS(this,'cc-mac')">Mac</button>
+              <button class="os-tab" onclick="switchOS(this,'cc-win')">Windows</button>
+            </div>
+            <div id="cc-mac" class="os-content active">
+              <kbd class="kbd">Command ⌘</kbd> + <kbd class="kbd">Space</kbd> を押して Spotlight を開き、「ターミナル」と入力してEnter
+            </div>
+            <div id="cc-win" class="os-content">
+              スタートメニューで「PowerShell」または「コマンドプロンプト」を検索して開く<br>
+              <div class="warning">⚠️ WindowsではWSL（Windows Subsystem for Linux）の使用を推奨。インストールがまだの場合は先にWSLを入れてください。</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">2</div></div>
+        <div class="step-content">
+          <div class="step-title">Node.js のバージョンを確認する</div>
+          <div class="step-body">
+            ターミナルに以下を入力してEnterを押す。
+            <div class="code-block">node --version</div>
+            <code>v18.0.0</code> 以上の数字が表示されればOK。<br>
+            「command not found」と表示された場合は <a href="https://nodejs.org/ja" target="_blank" style="color:#6366f1">nodejs.org</a> からNode.jsをインストールする。
+            <div class="btn-row">
+              <a class="btn-secondary" href="https://nodejs.org/ja" target="_blank">→ Node.js 公式サイト（LTS版をダウンロード）</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">3</div></div>
+        <div class="step-content">
+          <div class="step-title">Claude Code をインストールする</div>
+          <div class="step-body">
+            ターミナルに以下を入力してEnterを押す（コピペ推奨）。
+            <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
+            文字がたくさん流れて最後に <code>added XX packages</code> と表示されたら成功。
+            <div class="warning">⚠️ <code>sudo</code> をつけないこと。<code>sudo npm install</code> はNG。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">4</div></div>
+        <div class="step-content">
+          <div class="step-title">起動してAnthropicアカウントにログイン</div>
+          <div class="step-body">
+            ターミナルで以下を入力してEnter。
+            <div class="code-block">claude</div>
+            ブラウザが自動で開いてAnthropicのログイン画面になる。<br>
+            Anthropicアカウント（claude.ai で使っているもの）でログインするとターミナルに戻り、AIと会話できる状態になる。
+            <div class="tip">💡 ログイン後は <code>claude</code> と打つだけでいつでも起動できます。</div>
+            <div class="btn-row">
+              <a class="btn-secondary" href="https://code.claude.com/docs/en/setup" target="_blank">📖 公式セットアップドキュメント</a>
+              <a class="btn-secondary" href="https://www.nxcode.io/resources/news/install-claude-code-setup-guide-2026" target="_blank">📸 画像つきインストールガイド（英語）</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== 3. スプレッドシート ==================== -->
+  <div class="tool-card" id="spreadsheet">
+    <div class="tool-header">
+      <div class="tool-icon">📊</div>
+      <div>
+        <div class="tool-name">Google スプレッドシート</div>
+        <div class="tool-desc">Googleのオンライン表計算ツール｜データ管理・整理に使う</div>
+      </div>
+    </div>
+
+    <div class="section-label">セットアップ手順</div>
+
+    <ul class="steps">
+      <li class="step">
+        <div class="step-left"><div class="step-num">1</div></div>
+        <div class="step-content">
+          <div class="step-title">Google アカウントにログイン</div>
+          <div class="step-body">
+            Googleアカウント（Gmail）を持っていない場合は <a href="https://accounts.google.com/signup" target="_blank" style="color:#10b981">accounts.google.com/signup</a> から無料で作成できる。<br>
+            すでに持っている場合はそのまま次へ進む。
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">2</div></div>
+        <div class="step-content">
+          <div class="step-title">Google スプレッドシートを開く</div>
+          <div class="step-body">
+            下のボタンからアクセスするか、Googleの検索画面で「スプレッドシート」と検索する。
+            <div class="btn-row">
+              <a class="btn-link" href="https://sheets.google.com" target="_blank">→ Google スプレッドシートを開く</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">3</div></div>
+        <div class="step-content">
+          <div class="step-title">新しいスプレッドシートを作成する</div>
+          <div class="step-body">
+            画面左上または中央の <strong>「＋ 空白」</strong> をクリックすると新しいスプレッドシートが作成される。
+            <div class="tip">💡 画面上部でファイル名を変更できます。わかりやすい名前をつけておきましょう。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">4</div></div>
+        <div class="step-content">
+          <div class="step-title">ブックマークしておく</div>
+          <div class="step-body">
+            よく使うのでブラウザでブックマーク（お気に入り）に追加しておくと便利。<br>
+            <kbd class="kbd">Command ⌘</kbd> + <kbd class="kbd">D</kbd>（Mac）/ <kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">D</kbd>（Windows）でブックマーク追加できる。
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== 4. Claude in Chrome ==================== -->
+  <div class="tool-card" id="claudechrome">
+    <div class="tool-header">
+      <div class="tool-icon">🌐</div>
+      <div>
+        <div class="tool-name">Claude in Chrome</div>
+        <div class="tool-desc">Chrome拡張機能｜ブラウザの横でClaudeを使う</div>
+      </div>
+    </div>
+
+    <div class="warning" style="margin-bottom: 20px;">⚠️ Google Chrome 専用です。Safari・EdgeなどのChrome以外のブラウザでは動作しません。</div>
+
+    <div class="section-label">セットアップ手順</div>
+
+    <ul class="steps">
+      <li class="step">
+        <div class="step-left"><div class="step-num">1</div></div>
+        <div class="step-content">
+          <div class="step-title">Google Chrome を用意する</div>
+          <div class="step-body">
+            Chromeがインストールされていない場合は先にインストールする。
+            <div class="btn-row">
+              <a class="btn-secondary" href="https://www.google.com/intl/ja/chrome/" target="_blank">→ Google Chrome をダウンロード</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">2</div></div>
+        <div class="step-content">
+          <div class="step-title">Chrome ウェブストアで拡張機能をインストール</div>
+          <div class="step-body">
+            下のボタンからChrome ウェブストアの「Claude」ページを開き、<strong>「Chromeに追加」</strong> をクリックする。<br>
+            「拡張機能を追加しますか？」というポップアップが出たら <strong>「拡張機能を追加」</strong> をクリック。
+            <div class="btn-row">
+              <a class="btn-link" href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target="_blank">→ Chrome ウェブストアでインストール</a>
+              <a class="btn-secondary" href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome" target="_blank">📖 公式セットアップガイド</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">3</div></div>
+        <div class="step-content">
+          <div class="step-title">拡張機能をピン留めする</div>
+          <div class="step-body">
+            Chromeのアドレスバー右側にある <strong>パズルピース🧩アイコン</strong> をクリックし、「Claude」の横にある <strong>📌ピンアイコン</strong> をクリックする。<br>
+            ツールバーにClaudeのアイコンが表示されるようになる。
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">4</div></div>
+        <div class="step-content">
+          <div class="step-title">Claudeアカウントでサインインする</div>
+          <div class="step-body">
+            ツールバーのClaudeアイコンをクリックして右サイドパネルを開く。<br>
+            <strong>「Sign In」</strong> をクリックして claude.ai で使っているアカウントでログインする。
+            <div class="tip">💡 ログイン後はブラウザのどのページでも右サイドパネルからClaudeに話しかけられます。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">5</div></div>
+        <div class="step-content">
+          <div class="step-title">権限モードを選択する</div>
+          <div class="step-body">
+            初回起動時に権限の設定を求められる。
+            <ul>
+              <li><strong>「確認してから実行」</strong>：Claudeが操作するたびに確認が入る（最初はこちら推奨）</li>
+              <li><strong>「自動で実行」</strong>：確認なしで自動操作（慣れてきたら）</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== 5. Addness ==================== -->
+  <div class="tool-card" id="addness">
+    <div class="tool-header">
+      <div class="tool-icon">✅</div>
+      <div>
+        <div class="tool-name">Addness</div>
+        <div class="tool-desc">タスク・ゴール管理ツール｜講座の進捗を管理する</div>
+      </div>
+    </div>
+
+    <div class="section-label">セットアップ手順</div>
+
+    <ul class="steps">
+      <li class="step">
+        <div class="step-left"><div class="step-num">1</div></div>
+        <div class="step-content">
+          <div class="step-title">サインアップページを開く</div>
+          <div class="step-body">
+            下のボタンからAddnessのサインアップページを開く。
+            <div class="btn-row">
+              <a class="btn-link" href="https://www.addness.com/sign-in?redirect_url=https%3A%2F%2Fwww.addness.com%2F" target="_blank">→ Addness サインアップはこちら</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">2</div></div>
+        <div class="step-content">
+          <div class="step-title">Googleアカウントでログイン</div>
+          <div class="step-body">
+            ページを開いたら <strong>「Googleでログイン」</strong> をタップして、使用するGoogleアカウントを選択する。<br>
+            確認画面が出たら <strong>「許可」</strong> をクリックすれば完了。
+            <div class="tip">💡 メールアドレスとパスワードの登録は不要です。Googleアカウントだけでログインできます。</div>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-left"><div class="step-num">3</div></div>
+        <div class="step-content">
+          <div class="step-title">ログイン完了</div>
+          <div class="step-body">
+            「今やるべきゴール」画面が表示されたらセットアップ完了。
+          </div>
+        </div>
+      </li>
+    </ul>
 
     <div class="divider"></div>
 
     <div class="section-label">アイコンの意味</div>
-    <table class="icon-table">
+    <table class="info-table">
       <thead>
-        <tr>
-          <th>ステータス</th>
-          <th>意味</th>
-        </tr>
+        <tr><th>アイコン</th><th>ステータス</th><th>意味</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="status-badge status-not-started">▷ 未着手</span></td>
+          <td>▷</td>
+          <td><span class="status-badge status-not-started">未着手</span></td>
           <td>まだ始めていない状態</td>
         </tr>
         <tr>
-          <td><span class="status-badge status-in-progress">✔ 実行中</span></td>
+          <td>✔</td>
+          <td><span class="status-badge status-in-progress">実行中</span></td>
           <td>現在進行中</td>
         </tr>
         <tr>
-          <td><span class="status-badge status-paused">⏸ 一時停止</span></td>
+          <td>⏸</td>
+          <td><span class="status-badge status-paused">一時停止</span></td>
           <td>一時的に止めている状態</td>
         </tr>
         <tr>
-          <td><span class="status-badge status-done">✔ 完了</span></td>
-          <td>完了した状態</td>
+          <td>✔</td>
+          <td><span class="status-badge status-done">完了</span></td>
+          <td>完了した状態（緑色）</td>
         </tr>
       </tbody>
     </table>
@@ -403,24 +822,33 @@
     <div class="divider"></div>
 
     <div class="section-label">操作ガイド</div>
-    <table class="icon-table">
+    <table class="info-table">
       <thead>
-        <tr>
-          <th>操作</th>
-          <th>方法</th>
-        </tr>
+        <tr><th>やりたいこと</th><th>操作方法</th></tr>
       </thead>
       <tbody>
-        <tr><td>実行開始 / 完了</td><td>●クリック</td></tr>
-        <tr><td>タイトルを編集</td><td>テキストクリック</td></tr>
-        <tr><td>編集を開始</td><td><span class="kbd">Enter</span></td></tr>
-        <tr><td>ゴールを移動</td><td><span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">Tab</span></td></tr>
-        <tr><td>保存して次を追加</td><td><span class="kbd">Enter</span></td></tr>
-        <tr><td>編集をキャンセル</td><td><span class="kbd">Esc</span></td></tr>
-        <tr><td>ゴールを削除（空のとき）</td><td><span class="kbd">Delete</span> <span class="kbd">⌫</span></td></tr>
-        <tr><td>ドラッグで並び替え</td><td>ドラッグ＆ドロップ</td></tr>
+        <tr><td>実行開始 / 完了にする</td><td>●クリック</td></tr>
+        <tr><td>タイトルを編集する</td><td>テキスト部分をクリック</td></tr>
+        <tr><td>編集を開始する</td><td><span class="kbd">Enter</span></td></tr>
+        <tr><td>ゴールを上下に移動する</td><td><span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">Tab</span></td></tr>
+        <tr><td>保存して次のゴールを追加</td><td><span class="kbd">Enter</span></td></tr>
+        <tr><td>編集をキャンセルする</td><td><span class="kbd">Esc</span></td></tr>
+        <tr><td>ゴールを削除する（空のとき）</td><td><span class="kbd">Delete</span> または <span class="kbd">⌫</span></td></tr>
+        <tr><td>ゴールを並び替える</td><td>ドラッグ＆ドロップ</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- 完了チェックリスト -->
+  <div style="background: white; border-radius: 16px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+    <div style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">🎯 セットアップ完了チェックリスト</div>
+    <div class="checklist">
+      <div class="checklist-item"><div class="check-circle"></div>Cursor がインストールされてログインできる</div>
+      <div class="checklist-item"><div class="check-circle"></div>Claude Code がインストールされて <code>claude</code> コマンドで起動できる</div>
+      <div class="checklist-item"><div class="check-circle"></div>Google スプレッドシートが開けてシートを作成できる</div>
+      <div class="checklist-item"><div class="check-circle"></div>Claude in Chrome がツールバーに表示されてサイドパネルが開ける</div>
+      <div class="checklist-item"><div class="check-circle"></div>Addness にログインして「今やるべきゴール」画面が見られる</div>
+    </div>
   </div>
 
 </div>
@@ -428,6 +856,16 @@
 <footer>
   AI講座 World 1 セットアップガイド
 </footer>
+
+<script>
+  function switchOS(btn, targetId) {
+    const card = btn.closest('.tool-card');
+    card.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+    card.querySelectorAll('.os-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(targetId).classList.add('active');
+  }
+</script>
 
 </body>
 </html>
